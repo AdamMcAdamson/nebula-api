@@ -4,19 +4,22 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/gorilla/mux"
+	"github.com/gin-gonic/gin"
 )
 
-func CourseSearch(w http.ResponseWriter, r *http.Request) {
-	urlParams := r.URL.Query()
+func CourseSearch(c *gin.Context) {
+	name := c.Query("name")              // value of specific query parameter: string
+	queryParams := c.Request.URL.Query() // map of all query params: map[string][]string
 
-	fmt.Println(urlParams)
-	fmt.Fprintf(w, "You're searching for the course by query\n")
+	fmt.Println(queryParams)
+	message := "You're searching for the course by query parameters. For instance the name is: " + name
+	c.String(http.StatusOK, message)
 }
 
-func CourseById(w http.ResponseWriter, r *http.Request) {
-	vars := mux.Vars(r)
+func CourseById(c *gin.Context) {
+	id := c.Param("id") // value of specfic URL parameter: string
 
-	fmt.Println(vars)
-	fmt.Fprintf(w, "You're searching for the course by id %s\n", vars["id"])
+	fmt.Println(id)
+	message := "You're searching for the course by id: " + id
+	c.String(http.StatusOK, message)
 }

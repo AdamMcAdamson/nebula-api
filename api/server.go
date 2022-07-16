@@ -3,41 +3,41 @@ package main
 import (
 	"net/http"
 
-	"github.com/gorilla/mux"
+	"github.com/gin-gonic/gin"
 
 	"github.com/UTDNebula/nebula-api/api/controllers"
 )
 
 func main() {
-	router := mux.NewRouter()
+	router := gin.Default()
 
 	// subroutes
-	courseRouter := router.PathPrefix("/course").Subrouter()
-	degreeRouter := router.PathPrefix("/degree").Subrouter()
-	examRouter := router.PathPrefix("/exam").Subrouter()
-	professorRouter := router.PathPrefix("/professor").Subrouter()
-	sectionRouter := router.PathPrefix("/section").Subrouter()
+	courseGroup := router.Group("/course")
+	degreeGroup := router.Group("/degree")
+	examGroup := router.Group("/exam")
+	professorGroup := router.Group("/professor")
+	sectionGroup := router.Group("/section")
 
 	// route controllers
-	courseRouter.HandleFunc("/", controllers.CourseSearch)
-	courseRouter.HandleFunc("/{id}", controllers.CourseById)
+	courseGroup.GET("/", controllers.CourseSearch)
+	courseGroup.GET("/:id", controllers.CourseById)
 
-	examRouter.HandleFunc("/", controllers.ExamSearch)
-	examRouter.HandleFunc("/{id}", controllers.ExamById)
+	examGroup.GET("/", controllers.ExamSearch)
+	examGroup.GET("/:id", controllers.ExamById)
 
-	degreeRouter.HandleFunc("/", controllers.DegreeSearch)
-	degreeRouter.HandleFunc("/{id}", controllers.DegreeById)
+	degreeGroup.GET("/", controllers.DegreeSearch)
+	degreeGroup.GET("/:id", controllers.DegreeById)
 
-	professorRouter.HandleFunc("/", controllers.ProfessorSearch)
-	professorRouter.HandleFunc("/{id}", controllers.ProfessorById)
+	professorGroup.GET("/", controllers.ProfessorSearch)
+	professorGroup.GET("/:id", controllers.ProfessorById)
 
-	sectionRouter.HandleFunc("/", controllers.SectionSearch)
-	sectionRouter.HandleFunc("/{id}", controllers.SectionById)
+	sectionGroup.GET("/", controllers.SectionSearch)
+	sectionGroup.GET("/:id", controllers.SectionById)
 
-	// // @DEBUG
-	// router.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-	// 	fmt.Fprintf(w, "Hello World!")
-	// })
+	// @DEBUG
+	router.GET("/", func(c *gin.Context) {
+		c.String(http.StatusOK, "Hello World!")
+	})
 
-	http.ListenAndServe(":80", router)
+	http.ListenAndServe(":8080", router)
 }
