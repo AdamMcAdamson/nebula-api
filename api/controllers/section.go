@@ -1,25 +1,81 @@
 package controllers
 
 import (
-	"fmt"
+	"context"
 	"net/http"
+	"time"
+
+	"github.com/UTDNebula/nebula-api/api/configs"
+	"github.com/UTDNebula/nebula-api/api/responses"
 
 	"github.com/gin-gonic/gin"
+
+	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/mongo"
 )
 
-func SectionSearch(c *gin.Context) {
-	name := c.Query("name")              // value of specific query parameter: string
-	queryParams := c.Request.URL.Query() // map of all query params: map[string][]string
+var sectionCollection *mongo.Collection = configs.GetCollection(configs.DB, "sections")
 
-	fmt.Println(queryParams)
-	message := "You're searching for the section by query parameters. For instance the name is: " + name
-	c.String(http.StatusOK, message)
+func SectionSearch() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		//name := c.Query("name")            // value of specific query parameter: string
+		queryParams := c.Request.URL.Query() // map of all query params: map[string][]string
+
+		ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+
+		// @TODO: Fix with model - There is NO typechecking!
+		// var sections []models.Section
+		var sections []map[string]interface{}
+
+		defer cancel()
+
+		// build query key value pairs (only one value per key)
+		query := bson.M{}
+		for key, _ := range queryParams {
+			query[key] = c.Query(key)
+		}
+
+		// get cursor for query results
+		cursor, err := sectionCollection.Find(ctx, query)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, responses.SectionResponse{Status: http.StatusInternalServerError, Message: "error", Data: err.Error()})
+			return
+		}
+
+		// retrieve and parse all valid documents
+		if err = cursor.All(ctx, &sections); err != nil {
+			panic(err)
+		}
+
+		// return result
+		c.JSON(http.StatusOK, responses.SectionResponse{Status: http.StatusOK, Message: "success", Data: sections})
+	}
 }
 
-func SectionById(c *gin.Context) {
-	id := c.Param("id") // value of specfic URL parameter: string
+func SectionById() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 
-	fmt.Println(id)
-	message := "You're searching for the section by id: " + id
-	c.String(http.StatusOK, message)
+		sectionId := c.Param("id")
+
+		// @TODO: Fix with model - There is NO typechecking!
+		// var section models.Section
+		var section map[string]interface{}
+
+		defer cancel()
+
+		// parse object id from id parameter
+		objId, _ := primitive.ObjectIDFromHex(sectionId)
+
+		// find and parse matching section
+		err := sectionCollection.FindOne(ctx, bson.M{"_id": objId}).Decode(&section)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, responses.SectionResponse{Status: http.StatusInternalServerError, Message: "error", Data: err.Error()})
+			return
+		}
+
+		// return result
+		c.JSON(http.StatusOK, responses.SectionResponse{Status: http.StatusOK, Message: "success", Data: section})
+	}
 }

@@ -65,8 +65,10 @@ func CourseById() gin.HandlerFunc {
 
 		defer cancel()
 
+		// parse object id from id parameter
 		objId, _ := primitive.ObjectIDFromHex(courseId)
 
+		// find and parse matching course
 		err := courseCollection.FindOne(ctx, bson.M{"_id": objId}).Decode(&course)
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, responses.CourseResponse{Status: http.StatusInternalServerError, Message: "error", Data: err.Error()})
