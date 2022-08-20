@@ -1,5 +1,6 @@
 # GraphQL removes the need for the type field, and doesn't support static values in schema,
 # so there are no shared fields for requirements, so we are using a Union type
+# and not using the ENUM example below.
 
 union Requirement = CourseRequirement | SectionRequirement | ExamRequirement | MajorRequirement | MinorRequirement | GPARequirement | ConsentRequirement | CollectionRequirement | HoursRequirement | OtherRequirement | ChoiceRequirement | LimitRequirement | CoreRequirement
 
@@ -66,6 +67,7 @@ type CoreRequirement {
 }
 
 
+# SHOULD NOT USE! Read comment at top of file
 
 # With ENUM
 

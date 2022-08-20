@@ -1113,6 +1113,7 @@ type Professor {
 }`, BuiltIn: false},
 	{Name: "../schema/requirement.graphqls", Input: `# GraphQL removes the need for the type field, and doesn't support static values in schema,
 # so there are no shared fields for requirements, so we are using a Union type
+# and not using the ENUM example below.
 
 union Requirement = CourseRequirement | SectionRequirement | ExamRequirement | MajorRequirement | MinorRequirement | GPARequirement | ConsentRequirement | CollectionRequirement | HoursRequirement | OtherRequirement | ChoiceRequirement | LimitRequirement | CoreRequirement
 
@@ -1179,6 +1180,7 @@ type CoreRequirement {
 }
 
 
+# SHOULD NOT USE! Read comment at top of file
 
 # With ENUM
 
@@ -1455,9 +1457,9 @@ func (ec *executionContext) _ALEKSExam_placement(ctx context.Context, field grap
 		}
 		return graphql.Null
 	}
-	res := resTmp.([]*model.PossibleOutcomes)
+	res := resTmp.([]model.PossibleOutcomes)
 	fc.Result = res
-	return ec.marshalNPossibleOutcomes2ᚕᚖgithubᚗcomᚋUTDNebulaᚋnebulaᚑapiᚋapiᚑgraphqlᚋgraphᚋmodelᚐPossibleOutcomesᚄ(ctx, field.Selections, res)
+	return ec.marshalNPossibleOutcomes2ᚕgithubᚗcomᚋUTDNebulaᚋnebulaᚑapiᚋapiᚑgraphqlᚋgraphᚋmodelᚐPossibleOutcomesᚄ(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) fieldContext_ALEKSExam_placement(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
@@ -1593,9 +1595,9 @@ func (ec *executionContext) _APExam_yields(ctx context.Context, field graphql.Co
 		}
 		return graphql.Null
 	}
-	res := resTmp.([]*model.PossibleOutcomes)
+	res := resTmp.([]model.PossibleOutcomes)
 	fc.Result = res
-	return ec.marshalNPossibleOutcomes2ᚕᚖgithubᚗcomᚋUTDNebulaᚋnebulaᚑapiᚋapiᚑgraphqlᚋgraphᚋmodelᚐPossibleOutcomesᚄ(ctx, field.Selections, res)
+	return ec.marshalNPossibleOutcomes2ᚕgithubᚗcomᚋUTDNebulaᚋnebulaᚑapiᚋapiᚑgraphqlᚋgraphᚋmodelᚐPossibleOutcomesᚄ(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) fieldContext_APExam_yields(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
@@ -2083,9 +2085,9 @@ func (ec *executionContext) _CLEPExam_yields(ctx context.Context, field graphql.
 		}
 		return graphql.Null
 	}
-	res := resTmp.([]*model.PossibleOutcomes)
+	res := resTmp.([]model.PossibleOutcomes)
 	fc.Result = res
-	return ec.marshalNPossibleOutcomes2ᚕᚖgithubᚗcomᚋUTDNebulaᚋnebulaᚑapiᚋapiᚑgraphqlᚋgraphᚋmodelᚐPossibleOutcomesᚄ(ctx, field.Selections, res)
+	return ec.marshalNPossibleOutcomes2ᚕgithubᚗcomᚋUTDNebulaᚋnebulaᚑapiᚋapiᚑgraphqlᚋgraphᚋmodelᚐPossibleOutcomesᚄ(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) fieldContext_CLEPExam_yields(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
@@ -2177,9 +2179,9 @@ func (ec *executionContext) _CSPlacementExam_yields(ctx context.Context, field g
 		}
 		return graphql.Null
 	}
-	res := resTmp.([]*model.PossibleOutcomes)
+	res := resTmp.([]model.PossibleOutcomes)
 	fc.Result = res
-	return ec.marshalNPossibleOutcomes2ᚕᚖgithubᚗcomᚋUTDNebulaᚋnebulaᚑapiᚋapiᚑgraphqlᚋgraphᚋmodelᚐPossibleOutcomesᚄ(ctx, field.Selections, res)
+	return ec.marshalNPossibleOutcomes2ᚕgithubᚗcomᚋUTDNebulaᚋnebulaᚑapiᚋapiᚑgraphqlᚋgraphᚋmodelᚐPossibleOutcomesᚄ(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) fieldContext_CSPlacementExam_yields(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
@@ -4005,9 +4007,9 @@ func (ec *executionContext) _IBExam_yields(ctx context.Context, field graphql.Co
 		}
 		return graphql.Null
 	}
-	res := resTmp.([]*model.PossibleOutcomes)
+	res := resTmp.([]model.PossibleOutcomes)
 	fc.Result = res
-	return ec.marshalNPossibleOutcomes2ᚕᚖgithubᚗcomᚋUTDNebulaᚋnebulaᚑapiᚋapiᚑgraphqlᚋgraphᚋmodelᚐPossibleOutcomesᚄ(ctx, field.Selections, res)
+	return ec.marshalNPossibleOutcomes2ᚕgithubᚗcomᚋUTDNebulaᚋnebulaᚑapiᚋapiᚑgraphqlᚋgraphᚋmodelᚐPossibleOutcomesᚄ(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) fieldContext_IBExam_yields(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
@@ -10238,7 +10240,11 @@ func (ec *executionContext) marshalNOutcome2ᚕᚕgithubᚗcomᚋUTDNebulaᚋneb
 	return ret
 }
 
-func (ec *executionContext) marshalNPossibleOutcomes2ᚕᚖgithubᚗcomᚋUTDNebulaᚋnebulaᚑapiᚋapiᚑgraphqlᚋgraphᚋmodelᚐPossibleOutcomesᚄ(ctx context.Context, sel ast.SelectionSet, v []*model.PossibleOutcomes) graphql.Marshaler {
+func (ec *executionContext) marshalNPossibleOutcomes2githubᚗcomᚋUTDNebulaᚋnebulaᚑapiᚋapiᚑgraphqlᚋgraphᚋmodelᚐPossibleOutcomes(ctx context.Context, sel ast.SelectionSet, v model.PossibleOutcomes) graphql.Marshaler {
+	return ec._PossibleOutcomes(ctx, sel, &v)
+}
+
+func (ec *executionContext) marshalNPossibleOutcomes2ᚕgithubᚗcomᚋUTDNebulaᚋnebulaᚑapiᚋapiᚑgraphqlᚋgraphᚋmodelᚐPossibleOutcomesᚄ(ctx context.Context, sel ast.SelectionSet, v []model.PossibleOutcomes) graphql.Marshaler {
 	ret := make(graphql.Array, len(v))
 	var wg sync.WaitGroup
 	isLen1 := len(v) == 1
@@ -10262,7 +10268,7 @@ func (ec *executionContext) marshalNPossibleOutcomes2ᚕᚖgithubᚗcomᚋUTDNeb
 			if !isLen1 {
 				defer wg.Done()
 			}
-			ret[i] = ec.marshalNPossibleOutcomes2ᚖgithubᚗcomᚋUTDNebulaᚋnebulaᚑapiᚋapiᚑgraphqlᚋgraphᚋmodelᚐPossibleOutcomes(ctx, sel, v[i])
+			ret[i] = ec.marshalNPossibleOutcomes2githubᚗcomᚋUTDNebulaᚋnebulaᚑapiᚋapiᚑgraphqlᚋgraphᚋmodelᚐPossibleOutcomes(ctx, sel, v[i])
 		}
 		if isLen1 {
 			f(i)
@@ -10280,16 +10286,6 @@ func (ec *executionContext) marshalNPossibleOutcomes2ᚕᚖgithubᚗcomᚋUTDNeb
 	}
 
 	return ret
-}
-
-func (ec *executionContext) marshalNPossibleOutcomes2ᚖgithubᚗcomᚋUTDNebulaᚋnebulaᚑapiᚋapiᚑgraphqlᚋgraphᚋmodelᚐPossibleOutcomes(ctx context.Context, sel ast.SelectionSet, v *model.PossibleOutcomes) graphql.Marshaler {
-	if v == nil {
-		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
-			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
-		}
-		return graphql.Null
-	}
-	return ec._PossibleOutcomes(ctx, sel, v)
 }
 
 func (ec *executionContext) marshalNProfessor2ᚕᚖgithubᚗcomᚋUTDNebulaᚋnebulaᚑapiᚋapiᚑgraphqlᚋgraphᚋmodelᚐProfessorᚄ(ctx context.Context, sel ast.SelectionSet, v []*model.Professor) graphql.Marshaler {
