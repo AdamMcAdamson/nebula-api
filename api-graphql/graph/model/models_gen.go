@@ -21,16 +21,16 @@ type Requirement interface {
 }
 
 type ALEKSExam struct {
-	ID        string    `json:"_id"`
-	Placement []Outcome `json:"placement"`
+	ID        string              `json:"_id"`
+	Placement []*PossibleOutcomes `json:"placement"`
 }
 
 func (ALEKSExam) IsExam() {}
 
 type APExam struct {
-	ID     string    `json:"_id"`
-	Name   string    `json:"name"`
-	Yields []Outcome `json:"yields"`
+	ID     string              `json:"_id"`
+	Name   string              `json:"name"`
+	Yields []*PossibleOutcomes `json:"yields"`
 }
 
 func (APExam) IsExam() {}
@@ -53,16 +53,16 @@ type Attributes struct {
 }
 
 type CLEPExam struct {
-	ID     string    `json:"_id"`
-	Name   string    `json:"name"`
-	Yields []Outcome `json:"yields"`
+	ID     string              `json:"_id"`
+	Name   string              `json:"name"`
+	Yields []*PossibleOutcomes `json:"yields"`
 }
 
 func (CLEPExam) IsExam() {}
 
 type CSPlacementExam struct {
-	ID     string    `json:"_id"`
-	Yields []Outcome `json:"yields"`
+	ID     string              `json:"_id"`
+	Yields []*PossibleOutcomes `json:"yields"`
 }
 
 func (CSPlacementExam) IsExam() {}
@@ -153,10 +153,10 @@ type HoursRequirement struct {
 func (HoursRequirement) IsRequirement() {}
 
 type IBExam struct {
-	ID     string    `json:"_id"`
-	Name   string    `json:"name"`
-	Level  string    `json:"level"`
-	Yields []Outcome `json:"yields"`
+	ID     string              `json:"_id"`
+	Name   string              `json:"name"`
+	Level  string              `json:"level"`
+	Yields []*PossibleOutcomes `json:"yields"`
 }
 
 func (IBExam) IsExam() {}

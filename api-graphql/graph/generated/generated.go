@@ -1047,30 +1047,30 @@ interface Exam {
 type APExam implements Exam {
     _id: ID!
     name: String!
-    yields: [Outcome!]!
+    yields: [PossibleOutcomes!]!
 }
 
 type ALEKSExam implements Exam {
     _id: ID!
-    placement: [Outcome!]!
+    placement: [PossibleOutcomes!]!
 }
 
 type CLEPExam implements Exam {
     _id: ID!
     name: String!
-    yields: [Outcome!]!
+    yields: [PossibleOutcomes!]!
 }
 
 type IBExam implements Exam {
     _id: ID!
     name: String!
     level: String!
-    yields: [Outcome!]!
+    yields: [PossibleOutcomes!]!
 }
 
 type CSPlacementExam implements Exam {
     _id: ID!
-    yields: [Outcome!]!
+    yields: [PossibleOutcomes!]!
 }`, BuiltIn: false},
 	{Name: "../schema/location.graphqls", Input: `type Location {
     building: String!
@@ -1455,9 +1455,9 @@ func (ec *executionContext) _ALEKSExam_placement(ctx context.Context, field grap
 		}
 		return graphql.Null
 	}
-	res := resTmp.([]model.Outcome)
+	res := resTmp.([]*model.PossibleOutcomes)
 	fc.Result = res
-	return ec.marshalNOutcome2ᚕgithubᚗcomᚋUTDNebulaᚋnebulaᚑapiᚋapiᚑgraphqlᚋgraphᚋmodelᚐOutcomeᚄ(ctx, field.Selections, res)
+	return ec.marshalNPossibleOutcomes2ᚕᚖgithubᚗcomᚋUTDNebulaᚋnebulaᚑapiᚋapiᚑgraphqlᚋgraphᚋmodelᚐPossibleOutcomesᚄ(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) fieldContext_ALEKSExam_placement(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
@@ -1467,7 +1467,13 @@ func (ec *executionContext) fieldContext_ALEKSExam_placement(ctx context.Context
 		IsMethod:   false,
 		IsResolver: false,
 		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
-			return nil, errors.New("field of type Outcome does not have child fields")
+			switch field.Name {
+			case "requirement":
+				return ec.fieldContext_PossibleOutcomes_requirement(ctx, field)
+			case "possible_outcomes":
+				return ec.fieldContext_PossibleOutcomes_possible_outcomes(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type PossibleOutcomes", field.Name)
 		},
 	}
 	return fc, nil
@@ -1587,9 +1593,9 @@ func (ec *executionContext) _APExam_yields(ctx context.Context, field graphql.Co
 		}
 		return graphql.Null
 	}
-	res := resTmp.([]model.Outcome)
+	res := resTmp.([]*model.PossibleOutcomes)
 	fc.Result = res
-	return ec.marshalNOutcome2ᚕgithubᚗcomᚋUTDNebulaᚋnebulaᚑapiᚋapiᚑgraphqlᚋgraphᚋmodelᚐOutcomeᚄ(ctx, field.Selections, res)
+	return ec.marshalNPossibleOutcomes2ᚕᚖgithubᚗcomᚋUTDNebulaᚋnebulaᚑapiᚋapiᚑgraphqlᚋgraphᚋmodelᚐPossibleOutcomesᚄ(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) fieldContext_APExam_yields(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
@@ -1599,7 +1605,13 @@ func (ec *executionContext) fieldContext_APExam_yields(ctx context.Context, fiel
 		IsMethod:   false,
 		IsResolver: false,
 		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
-			return nil, errors.New("field of type Outcome does not have child fields")
+			switch field.Name {
+			case "requirement":
+				return ec.fieldContext_PossibleOutcomes_requirement(ctx, field)
+			case "possible_outcomes":
+				return ec.fieldContext_PossibleOutcomes_possible_outcomes(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type PossibleOutcomes", field.Name)
 		},
 	}
 	return fc, nil
@@ -2071,9 +2083,9 @@ func (ec *executionContext) _CLEPExam_yields(ctx context.Context, field graphql.
 		}
 		return graphql.Null
 	}
-	res := resTmp.([]model.Outcome)
+	res := resTmp.([]*model.PossibleOutcomes)
 	fc.Result = res
-	return ec.marshalNOutcome2ᚕgithubᚗcomᚋUTDNebulaᚋnebulaᚑapiᚋapiᚑgraphqlᚋgraphᚋmodelᚐOutcomeᚄ(ctx, field.Selections, res)
+	return ec.marshalNPossibleOutcomes2ᚕᚖgithubᚗcomᚋUTDNebulaᚋnebulaᚑapiᚋapiᚑgraphqlᚋgraphᚋmodelᚐPossibleOutcomesᚄ(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) fieldContext_CLEPExam_yields(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
@@ -2083,7 +2095,13 @@ func (ec *executionContext) fieldContext_CLEPExam_yields(ctx context.Context, fi
 		IsMethod:   false,
 		IsResolver: false,
 		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
-			return nil, errors.New("field of type Outcome does not have child fields")
+			switch field.Name {
+			case "requirement":
+				return ec.fieldContext_PossibleOutcomes_requirement(ctx, field)
+			case "possible_outcomes":
+				return ec.fieldContext_PossibleOutcomes_possible_outcomes(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type PossibleOutcomes", field.Name)
 		},
 	}
 	return fc, nil
@@ -2159,9 +2177,9 @@ func (ec *executionContext) _CSPlacementExam_yields(ctx context.Context, field g
 		}
 		return graphql.Null
 	}
-	res := resTmp.([]model.Outcome)
+	res := resTmp.([]*model.PossibleOutcomes)
 	fc.Result = res
-	return ec.marshalNOutcome2ᚕgithubᚗcomᚋUTDNebulaᚋnebulaᚑapiᚋapiᚑgraphqlᚋgraphᚋmodelᚐOutcomeᚄ(ctx, field.Selections, res)
+	return ec.marshalNPossibleOutcomes2ᚕᚖgithubᚗcomᚋUTDNebulaᚋnebulaᚑapiᚋapiᚑgraphqlᚋgraphᚋmodelᚐPossibleOutcomesᚄ(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) fieldContext_CSPlacementExam_yields(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
@@ -2171,7 +2189,13 @@ func (ec *executionContext) fieldContext_CSPlacementExam_yields(ctx context.Cont
 		IsMethod:   false,
 		IsResolver: false,
 		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
-			return nil, errors.New("field of type Outcome does not have child fields")
+			switch field.Name {
+			case "requirement":
+				return ec.fieldContext_PossibleOutcomes_requirement(ctx, field)
+			case "possible_outcomes":
+				return ec.fieldContext_PossibleOutcomes_possible_outcomes(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type PossibleOutcomes", field.Name)
 		},
 	}
 	return fc, nil
@@ -3981,9 +4005,9 @@ func (ec *executionContext) _IBExam_yields(ctx context.Context, field graphql.Co
 		}
 		return graphql.Null
 	}
-	res := resTmp.([]model.Outcome)
+	res := resTmp.([]*model.PossibleOutcomes)
 	fc.Result = res
-	return ec.marshalNOutcome2ᚕgithubᚗcomᚋUTDNebulaᚋnebulaᚑapiᚋapiᚑgraphqlᚋgraphᚋmodelᚐOutcomeᚄ(ctx, field.Selections, res)
+	return ec.marshalNPossibleOutcomes2ᚕᚖgithubᚗcomᚋUTDNebulaᚋnebulaᚑapiᚋapiᚑgraphqlᚋgraphᚋmodelᚐPossibleOutcomesᚄ(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) fieldContext_IBExam_yields(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
@@ -3993,7 +4017,13 @@ func (ec *executionContext) fieldContext_IBExam_yields(ctx context.Context, fiel
 		IsMethod:   false,
 		IsResolver: false,
 		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
-			return nil, errors.New("field of type Outcome does not have child fields")
+			switch field.Name {
+			case "requirement":
+				return ec.fieldContext_PossibleOutcomes_requirement(ctx, field)
+			case "possible_outcomes":
+				return ec.fieldContext_PossibleOutcomes_possible_outcomes(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type PossibleOutcomes", field.Name)
 		},
 	}
 	return fc, nil
@@ -10206,6 +10236,60 @@ func (ec *executionContext) marshalNOutcome2ᚕᚕgithubᚗcomᚋUTDNebulaᚋneb
 	}
 
 	return ret
+}
+
+func (ec *executionContext) marshalNPossibleOutcomes2ᚕᚖgithubᚗcomᚋUTDNebulaᚋnebulaᚑapiᚋapiᚑgraphqlᚋgraphᚋmodelᚐPossibleOutcomesᚄ(ctx context.Context, sel ast.SelectionSet, v []*model.PossibleOutcomes) graphql.Marshaler {
+	ret := make(graphql.Array, len(v))
+	var wg sync.WaitGroup
+	isLen1 := len(v) == 1
+	if !isLen1 {
+		wg.Add(len(v))
+	}
+	for i := range v {
+		i := i
+		fc := &graphql.FieldContext{
+			Index:  &i,
+			Result: &v[i],
+		}
+		ctx := graphql.WithFieldContext(ctx, fc)
+		f := func(i int) {
+			defer func() {
+				if r := recover(); r != nil {
+					ec.Error(ctx, ec.Recover(ctx, r))
+					ret = nil
+				}
+			}()
+			if !isLen1 {
+				defer wg.Done()
+			}
+			ret[i] = ec.marshalNPossibleOutcomes2ᚖgithubᚗcomᚋUTDNebulaᚋnebulaᚑapiᚋapiᚑgraphqlᚋgraphᚋmodelᚐPossibleOutcomes(ctx, sel, v[i])
+		}
+		if isLen1 {
+			f(i)
+		} else {
+			go f(i)
+		}
+
+	}
+	wg.Wait()
+
+	for _, e := range ret {
+		if e == graphql.Null {
+			return graphql.Null
+		}
+	}
+
+	return ret
+}
+
+func (ec *executionContext) marshalNPossibleOutcomes2ᚖgithubᚗcomᚋUTDNebulaᚋnebulaᚑapiᚋapiᚑgraphqlᚋgraphᚋmodelᚐPossibleOutcomes(ctx context.Context, sel ast.SelectionSet, v *model.PossibleOutcomes) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._PossibleOutcomes(ctx, sel, v)
 }
 
 func (ec *executionContext) marshalNProfessor2ᚕᚖgithubᚗcomᚋUTDNebulaᚋnebulaᚑapiᚋapiᚑgraphqlᚋgraphᚋmodelᚐProfessorᚄ(ctx context.Context, sel ast.SelectionSet, v []*model.Professor) graphql.Marshaler {

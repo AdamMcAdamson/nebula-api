@@ -13,28 +13,28 @@ interface Exam {
 type APExam implements Exam {
     _id: ID!
     name: String!
-    yields: [Outcome!]!
+    yields: [PossibleOutcomes!]!
 }
 
 type ALEKSExam implements Exam {
     _id: ID!
-    placement: [Outcome!]!
+    placement: [PossibleOutcomes!]!
 }
 
 type CLEPExam implements Exam {
     _id: ID!
     name: String!
-    yields: [Outcome!]!
+    yields: [PossibleOutcomes!]!
 }
 
 type IBExam implements Exam {
     _id: ID!
     name: String!
     level: String!
-    yields: [Outcome!]!
+    yields: [PossibleOutcomes!]!
 }
 
 type CSPlacementExam implements Exam {
     _id: ID!
-    yields: [Outcome!]!
+    yields: [PossibleOutcomes!]!
 }
