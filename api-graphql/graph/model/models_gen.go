@@ -2,19 +2,293 @@
 
 package model
 
-type NewTodo struct {
-	Text   string `json:"text"`
-	UserID string `json:"userId"`
+import (
+	"fmt"
+	"io"
+	"strconv"
+)
+
+type Exam interface {
+	IsExam()
 }
 
-type Todo struct {
-	ID   string `json:"id"`
-	Text string `json:"text"`
-	Done bool   `json:"done"`
-	User *User  `json:"user"`
+type Outcome interface {
+	IsOutcome()
 }
 
-type User struct {
-	ID   string `json:"id"`
-	Name string `json:"name"`
+type Requirement interface {
+	IsRequirement()
+}
+
+type ALEKSExam struct {
+	ID        string    `json:"_id"`
+	Placement []Outcome `json:"placement"`
+}
+
+func (ALEKSExam) IsExam() {}
+
+type APExam struct {
+	ID     string    `json:"_id"`
+	Name   string    `json:"name"`
+	Yields []Outcome `json:"yields"`
+}
+
+func (APExam) IsExam() {}
+
+type AcademicSession struct {
+	Name      string `json:"name"`
+	StartDate string `json:"start_date"`
+	EndDate   string `json:"end_date"`
+}
+
+type Assistant struct {
+	FirstName string `json:"first_name"`
+	LastName  string `json:"last_name"`
+	Role      string `json:"role"`
+	Email     string `json:"email"`
+}
+
+type Attributes struct {
+	RawAttributes []string `json:"raw_attributes"`
+}
+
+type CLEPExam struct {
+	ID     string    `json:"_id"`
+	Name   string    `json:"name"`
+	Yields []Outcome `json:"yields"`
+}
+
+func (CLEPExam) IsExam() {}
+
+type CSPlacementExam struct {
+	ID     string    `json:"_id"`
+	Yields []Outcome `json:"yields"`
+}
+
+func (CSPlacementExam) IsExam() {}
+
+type ChoiceRequirement struct {
+	Choices *CollectionRequirement `json:"choices"`
+}
+
+func (ChoiceRequirement) IsRequirement() {}
+
+type CollectionRequirement struct {
+	Name     string        `json:"name"`
+	Required int           `json:"required"`
+	Options  []Requirement `json:"options"`
+}
+
+func (CollectionRequirement) IsRequirement() {}
+
+type ConsentRequirement struct {
+	Granter string `json:"granter"`
+}
+
+func (ConsentRequirement) IsRequirement() {}
+
+type CoreRequirement struct {
+	CoreFlag string `json:"core_flag"`
+	Hours    int    `json:"hours"`
+}
+
+func (CoreRequirement) IsRequirement() {}
+
+type Course struct {
+	ID                     string                 `json:"_id"`
+	CourseNumber           string                 `json:"course_number"`
+	SubjectPrefix          string                 `json:"subject_prefix"`
+	Title                  string                 `json:"title"`
+	Description            string                 `json:"description"`
+	School                 string                 `json:"school"`
+	CreditHours            string                 `json:"credit_hours"`
+	ClassLevel             string                 `json:"class_level"`
+	ActivityType           string                 `json:"activity_type"`
+	Grading                string                 `json:"grading"`
+	InternalCourseNumber   string                 `json:"internal_course_number"`
+	Prerequisites          *CollectionRequirement `json:"prerequisites"`
+	Corequisites           *CollectionRequirement `json:"corequisites"`
+	CoOrPreRequisites      *CollectionRequirement `json:"co_or_pre_requisites"`
+	Sections               []*Section             `json:"sections"`
+	LectureContactHours    string                 `json:"lecture_contact_hours"`
+	LaboratoryContactHours string                 `json:"laboratory_contact_hours"`
+	OfferingFrequency      string                 `json:"offering_frequency"`
+}
+
+func (Course) IsOutcome() {}
+
+type CourseRequirement struct {
+	ClassReference *Course `json:"class_reference"`
+	MinimumGrade   string  `json:"minimum_grade"`
+}
+
+func (CourseRequirement) IsRequirement() {}
+
+type Credit struct {
+	Category    string `json:"category"`
+	CreditHours int    `json:"credit_hours"`
+}
+
+func (Credit) IsOutcome() {}
+
+type ExamRequirement struct {
+	ExamReference Exam `json:"exam_reference"`
+	MinimumScore  int  `json:"minimum_score"`
+}
+
+func (ExamRequirement) IsRequirement() {}
+
+type GPARequirement struct {
+	Minimum float64 `json:"minimum"`
+	Subset  string  `json:"subset"`
+}
+
+func (GPARequirement) IsRequirement() {}
+
+type HoursRequirement struct {
+	Required int                  `json:"required"`
+	Options  []*CourseRequirement `json:"options"`
+}
+
+func (HoursRequirement) IsRequirement() {}
+
+type IBExam struct {
+	ID     string    `json:"_id"`
+	Name   string    `json:"name"`
+	Level  string    `json:"level"`
+	Yields []Outcome `json:"yields"`
+}
+
+func (IBExam) IsExam() {}
+
+type LimitRequirement struct {
+	MaxHours int `json:"max_hours"`
+}
+
+func (LimitRequirement) IsRequirement() {}
+
+type Location struct {
+	Building string `json:"building"`
+	Room     string `json:"room"`
+	MapURI   string `json:"map_uri"`
+}
+
+type MajorRequirement struct {
+	Major string `json:"major"`
+}
+
+func (MajorRequirement) IsRequirement() {}
+
+type Meeting struct {
+	StartDate   string       `json:"start_date"`
+	EndDate     string       `json:"end_date"`
+	MeetingDays []string     `json:"meeting_days"`
+	StartTime   string       `json:"start_time"`
+	EndTime     string       `json:"end_time"`
+	Modality    ModalityType `json:"modality"`
+	Location    *Location    `json:"location"`
+}
+
+type MinorRequirement struct {
+	Minor string `json:"minor"`
+}
+
+func (MinorRequirement) IsRequirement() {}
+
+type OtherRequirement struct {
+	Description string `json:"description"`
+	Condition   string `json:"condition"`
+}
+
+func (OtherRequirement) IsRequirement() {}
+
+type PossibleOutcomes struct {
+	Requirement      Requirement `json:"requirement"`
+	PossibleOutcomes [][]Outcome `json:"possible_outcomes"`
+}
+
+type Professor struct {
+	ID          string     `json:"_id"`
+	FirstName   string     `json:"first_name"`
+	LastName    string     `json:"last_name"`
+	Titles      []string   `json:"titles"`
+	Email       string     `json:"email"`
+	PhoneNumber *string    `json:"phone_number"`
+	Office      *Location  `json:"office"`
+	ProfileURI  *string    `json:"profile_uri"`
+	ImageURI    *string    `json:"image_uri"`
+	OfficeHours []*Meeting `json:"office_hours"`
+	Sections    []*Section `json:"sections"`
+}
+
+type Section struct {
+	ID                  string                 `json:"_id"`
+	SectionNumber       string                 `json:"section_number"`
+	CourseReference     *Course                `json:"course_reference"`
+	SectionCorequisites *CollectionRequirement `json:"section_corequisites"`
+	AcademicSession     *AcademicSession       `json:"academic_session"`
+	Professors          []*Professor           `json:"professors"`
+	TeachingAssistants  []*Assistant           `json:"teaching_assistants"`
+	InternalClassNumber string                 `json:"internal_class_number"`
+	InstructionMode     string                 `json:"instruction_mode"`
+	Meetings            []*Meeting             `json:"meetings"`
+	CoreFlags           []string               `json:"core_flags"`
+	SyllabusURI         string                 `json:"syllabus_uri"`
+	GradeDistribution   []int                  `json:"grade_distribution"`
+	Attributes          *Attributes            `json:"attributes"`
+}
+
+type SectionRequirement struct {
+	SectionReference *Section `json:"section_reference"`
+}
+
+func (SectionRequirement) IsRequirement() {}
+
+type ModalityType string
+
+const (
+	ModalityTypePending     ModalityType = "PENDING"
+	ModalityTypeTraditional ModalityType = "TRADITIONAL"
+	ModalityTypeHybrid      ModalityType = "HYBRID"
+	ModalityTypeFlexible    ModalityType = "FLEXIBLE"
+	ModalityTypeRemote      ModalityType = "REMOTE"
+	ModalityTypeOnline      ModalityType = "ONLINE"
+)
+
+var AllModalityType = []ModalityType{
+	ModalityTypePending,
+	ModalityTypeTraditional,
+	ModalityTypeHybrid,
+	ModalityTypeFlexible,
+	ModalityTypeRemote,
+	ModalityTypeOnline,
+}
+
+func (e ModalityType) IsValid() bool {
+	switch e {
+	case ModalityTypePending, ModalityTypeTraditional, ModalityTypeHybrid, ModalityTypeFlexible, ModalityTypeRemote, ModalityTypeOnline:
+		return true
+	}
+	return false
+}
+
+func (e ModalityType) String() string {
+	return string(e)
+}
+
+func (e *ModalityType) UnmarshalGQL(v interface{}) error {
+	str, ok := v.(string)
+	if !ok {
+		return fmt.Errorf("enums must be strings")
+	}
+
+	*e = ModalityType(str)
+	if !e.IsValid() {
+		return fmt.Errorf("%s is not a valid ModalityType", str)
+	}
+	return nil
+}
+
+func (e ModalityType) MarshalGQL(w io.Writer) {
+	fmt.Fprint(w, strconv.Quote(e.String()))
 }
