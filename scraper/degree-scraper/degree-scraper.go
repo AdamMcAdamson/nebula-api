@@ -26,15 +26,24 @@ func main() {
 	defer cancel()
 	
 	start := time.Now()
+
 	var res []string
+	
+	// selector for js
+	sel1 := "p > a"
+	
+	// JavaScript for getting inner text of all elements meeting the selector sel1
+	js := fmt.Sprintf(`[...document.querySelectorAll('%s')].map((e) => e.innerText)`, sel1)
+
+
 	err := chromedp.Run(ctx,
 		emulation.SetUserAgentOverride("Degree-Scraper 0.1"),
 
 		// @TODO: read catelog-uris.txt (or programmatically navigate site)
-		chromedp.Navigate(`https://catalog.utdallas.edu/2022/undergraduate/programs/ah/literature`),
+		chromedp.Navigate(`https://catalog.utdallas.edu/2022/undergraduate/programs/bbs/cognitive-science`),
 			
-		// Get inner text of all elements meeting the selector 'p > a'
-		chromedp.Evaluate(`[...document.querySelectorAll('p > a')].map((e) => e.innerText)`, &res),
+		// Evaluate js
+		chromedp.Evaluate(js, &res),
 	)
 
 	if err != nil {
@@ -55,6 +64,5 @@ func main() {
 		}
 	}
 
-	//fmt.Printf("res:\n'%s'\n", res)
 	fmt.Printf("\nTook: %f secs\n", time.Since(start).Seconds())
 }
