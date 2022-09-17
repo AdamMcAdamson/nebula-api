@@ -70,7 +70,6 @@ func main() {
 	// JavaScript for getting inner text of all elements meeting the selector sel1
 	js := fmt.Sprintf(`[...document.querySelectorAll('%s')].map((e) => e.innerText)`, sel1)
 
-
 	err := chromedp.Run(ctx,
 		emulation.SetUserAgentOverride("Degree-Scraper 0.1"),
 
@@ -85,10 +84,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-
-	
 	var requirements []Requirement
-	
 	
 	for _, val := range res {
 		temp := strings.Split(val," ")
