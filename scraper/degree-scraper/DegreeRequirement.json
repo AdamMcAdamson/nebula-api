@@ -1,0 +1,132 @@
+{
+    "name": "Degree Requirement",
+    "required": -1,
+    "options": [
+        {
+            "subject_prefix": "RHET",
+            "course_number": "1302",
+            "minimum_grade": "D-"
+        },
+        {
+            "subject_prefix": "COMM",
+            "course_number": "1311",
+            "minimum_grade": "D-"
+        },
+        {
+            "subject_prefix": "COMM",
+            "course_number": "1315",
+            "minimum_grade": "D-"
+        },
+        {
+            "core_flag": "010",
+            "hours": 6
+        },
+        {
+            "core_flag": "020",
+            "hours": 3
+        },
+        {
+            "core_flag": "030",
+            "hours": 6
+        },
+        {
+            "subject_prefix": "LIT",
+            "course_number": "2331",
+            "minimum_grade": "D-"
+        },
+        {
+            "core_flag": "040",
+            "hours": 3
+        },
+        {
+            "core_flag": "050",
+            "hours": 3
+        },
+        {
+            "core_flag": "060",
+            "hours": 6
+        },
+        {
+            "core_flag": "070",
+            "hours": 6
+        },
+        {
+            "core_flag": "080",
+            "hours": 3
+        },
+        {
+            "core_flag": "090",
+            "hours": 6
+        },
+        {
+            "subject_prefix": "LIT",
+            "course_number": "2350",
+            "minimum_grade": "D-"
+        },
+        {
+            "subject_prefix": "LIT",
+            "course_number": "2320",
+            "minimum_grade": "D-"
+        },
+        {
+            "subject_prefix": "LIT",
+            "course_number": "2321",
+            "minimum_grade": "D-"
+        },
+        {
+            "subject_prefix": "LIT",
+            "course_number": "2322",
+            "minimum_grade": "D-"
+        },
+        {
+            "subject_prefix": "LIT",
+            "course_number": "2331",
+            "minimum_grade": "D-"
+        },
+        {
+            "subject_prefix": "LIT",
+            "course_number": "3300",
+            "minimum_grade": "D-"
+        },
+        {
+            "subject_prefix": "LIT",
+            "course_number": "3339",
+            "minimum_grade": "D-"
+        },
+        {
+            "subject_prefix": "LIT",
+            "course_number": "4329",
+            "minimum_grade": "D-"
+        },
+        {
+            "subject_prefix": "LIT",
+            "course_number": "4390",
+            "minimum_grade": "D-"
+        },
+        {
+            "subject_prefix": "ARHM",
+            "course_number": "3342",
+            "minimum_grade": "D-"
+        },
+        {
+            "subject_prefix": "LIT",
+            "course_number": "3338",
+            "minimum_grade": "D-"
+        },
+        {
+            "subject_prefix": "LIT",
+            "course_number": "3319",
+            "minimum_grade": "D-"
+        },
+        {
+            "subject_prefix": "CRWT",
+            "course_number": "3330",
+            "minimum_grade": "D-"
+        },
+        {
+            "subject_prefix": "LIT",
+            "course_number": "3337",
+            "minimum_grade": "D-"
+        }
+    ]
+}

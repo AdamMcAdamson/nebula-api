@@ -1,4 +1,4 @@
-module github.com/UTDNebula/nebula-api
+module github.com/UTDNebula/nebula-api/api
 
 go 1.18
 
