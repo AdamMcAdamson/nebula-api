@@ -152,8 +152,7 @@ func main() {
 	// JavaScript for getting inner text of degree name and abbreviation
 	degreeJS := fmt.Sprintf(`[...document.querySelectorAll('%s')].map((e) => e.innerText)`, sel2)
 
-	//degree_verifier_sel := "h2 > em"
-
+	// Get innerHTML of h2 elements
 	degree_valJS := fmt.Sprintf(`[...document.querySelectorAll('%s')].map((e) => e.innerHTML)`, sel2)
 
 	// selector for element whose text includes the minimum credit hours
@@ -165,14 +164,16 @@ func main() {
 		chromedp.WithLogf(log.Printf),
 	)
 	defer cancel()
+
 	// create a timeout
-	ctx, cancel = context.WithTimeout(ctx, 300*time.Second)
+	ctx, cancel = context.WithTimeout(ctx, 600*time.Second)
 	defer cancel()
 
 	for _, yearInt := range years {
 		year := fmt.Sprintf("%d", yearInt)
 		uris := getCatelogUris(year)
 
+		// create folder for given year as needed
 		os.Mkdir("./output/"+year, 0666)
 
 		for _, uri := range uris {
@@ -196,6 +197,7 @@ func main() {
 				// Evaluate degreeJS
 				chromedp.Evaluate(degreeJS, &degree_res),
 
+				// Evaluate degree_valJS
 				chromedp.Evaluate(degree_valJS, &degree_res_verification),
 
 				// Get credit hours element text
@@ -209,9 +211,6 @@ func main() {
 			//	var requirements []Requirement
 			var requirements []interface{}
 
-			// remove ending index
-			// hours_res = hours_res[:len(hours_res)-5]
-
 			// extract minimum credit hours
 			var re = regexp.MustCompile(`\d+`)
 			hours, _ := strconv.Atoi(string(re.Find([]byte(hours_res))))
@@ -221,6 +220,7 @@ func main() {
 			var abbreviation string
 			if len(degree_res) >= 3 {
 				if strings.Contains(degree_res_verification[0], "<em>") {
+					// first h2 is not the abbreviation
 					name = degree_res[2]
 					abbreviation = degree_res[1]
 				} else {
