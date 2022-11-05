@@ -1,0 +1,119 @@
+[
+    [
+        "undergraduate/programs/ah/history",
+        "undergraduate/programs/ah/latin-american-studies",
+        "undergraduate/programs/ah/literature",
+        "undergraduate/programs/ah/philosophy",
+        "undergraduate/programs/ah/visual-and-performing-arts-art-history",
+        "undergraduate/programs/ah/visual-and-performing-arts-communication",
+        "undergraduate/programs/ah/visual-and-performing-arts-dance",
+        "undergraduate/programs/ah/visual-and-performing-arts-film",
+        "undergraduate/programs/ah/visual-and-performing-arts-interdisciplinary-arts",
+        "undergraduate/programs/ah/visual-and-performing-arts-music",
+        "undergraduate/programs/ah/visual-and-performing-arts-photo-video-digital",
+        "undergraduate/programs/ah/visual-and-performing-arts-theatre",
+        "undergraduate/programs/ah/visual-and-performing-arts-visual-arts",
+        "undergraduate/programs/atec/arts-and-technology-animation",
+        "undergraduate/programs/atec/arts-and-technology-critical-media-studies",
+        "undergraduate/programs/bbs/child-learning-and-development",
+        "undergraduate/programs/bbs/cognitive-science",
+        "undergraduate/programs/bbs/neuroscience",
+        "undergraduate/programs/bbs/psychology",
+        "undergraduate/programs/epps/criminology",
+        "undergraduate/programs/epps/criminology-biology",
+        "undergraduate/programs/epps/economics",
+        "undergraduate/programs/epps/economics-finance",
+        "undergraduate/programs/epps/geospatial-information-science",
+        "undergraduate/programs/epps/international-political-economy",
+        "undergraduate/programs/epps/international-political-economy-global-business",
+        "undergraduate/programs/epps/political-science",
+        "undergraduate/programs/epps/public-affairs",
+        "undergraduate/programs/epps/public-policy",
+        "undergraduate/programs/epps/sociology",
+        "undergraduate/programs/ecs/biomedical-engineering",
+        "undergraduate/programs/ecs/computer-engineering",
+        "undergraduate/programs/ecs/computer-science",
+        "undergraduate/programs/ecs/electrical-engineering",
+        "undergraduate/programs/ecs/mechanical-engineering",
+        "undergraduate/programs/ecs/software-engineering",
+        "undergraduate/programs/is/american-studies",
+        "undergraduate/programs/is/healthcare",   
+        "undergraduate/programs/is/interdisciplinary-studies",    
+        "undergraduate/programs/jsom/accounting",    
+        "undergraduate/programs/jsom/business-administration",    
+        "undergraduate/programs/jsom/finance",    
+        "undergraduate/programs/jsom/finance-economics",    
+        "undergraduate/programs/jsom/global-business",    
+        "undergraduate/programs/jsom/global-business-human-resource-management",    
+        "undergraduate/programs/jsom/global-business-international-political-economy",    
+        "undergraduate/programs/jsom/global-business-marketing",
+        "undergraduate/programs/jsom/global-business-supply-chain-management",
+        "undergraduate/programs/jsom/healthcare-management",
+        "undergraduate/programs/jsom/healthcare-management-biology",
+        "undergraduate/programs/jsom/healthcare-management-molecular-biology",
+        "undergraduate/programs/jsom/human-resource-management",
+        "undergraduate/programs/jsom/information-technology-systems",
+        "undergraduate/programs/jsom/marketing",
+        "undergraduate/programs/jsom/supply-chain-management",
+        "undergraduate/programs/nsm/biology",
+        "undergraduate/programs/nsm/biology-criminology",
+        "undergraduate/programs/nsm/biology-healthcare-management",
+        "undergraduate/programs/nsm/molecular-biology",
+        "undergraduate/programs/nsm/molecular-biology-healthcare-management",
+        "undergraduate/programs/nsm/biochemistry",
+        "undergraduate/programs/nsm/chemistry",
+        "undergraduate/programs/nsm/geosciences",
+        "undergraduate/programs/nsm/actuarial-science",
+        "undergraduate/programs/nsm/mathematics",
+        "undergraduate/programs/nsm/physics"
+    ],
+    [
+        {
+            "2022":"undergraduate/programs/ecs/data-science",
+            "else":"undergraduate/programs/data-science"
+        },
+        {
+            "2022":"undergraduate/programs/nsm/data-science",
+            "else":"undergraduate/programs/data-science"
+        },
+        {
+            "2022": "undergraduate/programs/atec/arts-and-technology-emerging-media-arts",
+            "2021": "undergraduate/programs/atec/arts-and-technology-emerging-media-arts"
+        },
+        {
+            "2022": "undergraduate/programs/is/education",
+            "2021": "undergraduate/programs/is/education"
+        },
+        {
+            "2022": "undergraduate/programs/jsom/business-analytics", 
+            "2021": "undergraduate/programs/jsom/business-analytics"
+        },
+        {
+            "2022": "undergraduate/programs/ah/literature-creative-writing",
+            "2021": "undergraduate/programs/ah/literature-creative-writing",
+            "2020": "undergraduate/programs/ah/literature-creative-writing"
+        },
+        {
+            "2022": "undergraduate/programs/ah/literature-rhetoric-and-communication",
+            "2021": "undergraduate/programs/ah/literature-rhetoric-and-communication",
+            "2020": "undergraduate/programs/ah/literature-rhetoric-and-communication"
+        },
+        {
+            "2022": "undergraduate/programs/ah/literature-spanish",
+            "2021": "undergraduate/programs/ah/literature-spanish",
+            "2020": "undergraduate/programs/ah/literature-spanish"
+        },
+        {
+            "2022": "undergraduate/programs/atec/arts-and-technology",
+            "2021": "undergraduate/programs/atec/arts-and-technology",
+            "2020": "undergraduate/programs/atec/arts-and-technology"
+        },
+        {
+            "2022": "undergraduate/programs/bbs/speech-language-and-hearing-sciences",
+            "2021": "undergraduate/programs/bbs/speech-language-and-hearing-sciences",
+            "2020": "undergraduate/programs/bbs/speech-language-and-hearing-sciences",
+            "else": "undergraduate/programs/bbs/speech-language-pathology-and-audiology"
+        }
+    ]
+
+]
